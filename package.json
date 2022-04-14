@@ -1,0 +1,17 @@
+{
+  "name": "YT-request",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "youtube.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "dotenv": "^16.0.0"
+  }
+}
