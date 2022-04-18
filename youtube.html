@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://apis.google.com/js/api.js"></script>
+<script>
+  /**
+   * Sample JavaScript code for youtube.commentThreads.insert
+   * See instructions for running APIs Explorer code samples locally:
+   * https://developers.google.com/explorer-help/code-samples#javascript
+   */
+
+  function authenticate() {
+    return gapi.auth2.getAuthInstance()
+        .signIn({scope: "https://www.googleapis.com/auth/youtube.force-ssl"})
+        .then(function() { console.log("Sign-in successful"); },
+              function(err) { console.error("Error signing in", err); });
+  }
+  function loadClient() {
+    gapi.client.setApiKey("AIzaSyBcapKagonajYAjyuuwEFHzJu1GaFmO_R8");
+    return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
+        .then(function() { console.log("GAPI client loaded for API"); },
+              function(err) { console.error("Error loading GAPI client for API", err); });
+  }
+  // Make sure the client is loaded and sign-in is complete before calling this method.
+  function execute() {
+    // fetch(`https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUtHvec3CcPdCHFdIU_a33Nw&key=AIzaSyBcapKagonajYAjyuuwEFHzJu1GaFmO_R8&part=snippet&maxResults=15`)
+    // .then((response) => response.json())
+    // .then((r) => {
+    //   console.log("RESPONSE", r.items)
+    // })
+    fetch(`https://youtube.googleapis.com/youtube/v3/videos/getRating?id=5K06BthMijw&key=AIzaSyBcapKagonajYAjyuuwEFHzJu1GaFmO_R8`)
+    .then((response) => response.json())
+    .then((r) => {
+      console.log("RESPONSE", r)
+    })
+
+    gapi.client.youtube.commentThreads.insert({
+      "part": [
+        "snippet"
+      ],
+      "resource": {
+        "snippet": {
+          "videoId": "5K06BthMijw",
+          "topLevelComment": {
+            "snippet": {
+              "textOriginal": "This is the start of a comment thread."
+            }
+          }
+        }
+      }
+    })
+        .then(function(response) {
+                // Handle the results here (response.result has the parsed body).
+                console.log("Response", response);
+              },
+              function(err) { console.error("Execute error", err); });
+  }
+
+  gapi.load("client:auth2", function() {
+    gapi.auth2.init({client_id: "597452506321-sqfen61rh4ombffn37e0vcfr904ad64n.apps.googleusercontent.com"});
+  });
+</script>
+<button onclick="authenticate().then(loadClient)">authorize and load</button>
+<button onclick="execute()">execute</button>
+
+<script src="youtube.js"></script>
+</body>
+</html>
