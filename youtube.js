@@ -17,7 +17,7 @@ let response;
 
 // a()
 const a = async () => {
-  response = await axios.get(`https://youtube.googleapis.com/youtube/v3/videos/getRating?id=5K06BthMijw&key=AIzaSyBcapKagonajYAjyuuwEFHzJu1GaFmO_R8`);
+  response = await axios.get(`https://youtube.googleapis.com/youtube/v3/videos/getRating?id=5K06BthMijw&key=${apiKey}`);
   
   
   console.log('DATA', response.data)
